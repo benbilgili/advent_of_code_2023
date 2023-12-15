@@ -1,0 +1,59 @@
+<!-- UNIX countdown. Code the remaining unix seconds between now and christmas. Bonus for real time countdown - Dougmac -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Countdown</title>
+    <style>
+        body {
+            background-color: #0e0e3b;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffcc00; 
+        }
+
+        #countdown {
+            font-size: 1.5em;
+            background-color: #1a1a6c;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="title">Christmas Countdown</h3>
+    <div id="countdown"></div>
+
+    <script>
+        const countdownDate = new Date('December 25, 2023 00:00:00').getTime();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        function updateCountdown() {
+            const currentDate = new Date().getTime(); 
+            const timeRemaining = countdownDate - currentDate; 
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            
+            if (timeRemaining < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('countdown').innerHTML = "It's Christmas!";
+            }
+        }
+    </script>
+</body>
+</html>
